@@ -1,8 +1,7 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.5.8;
 
 contract LogI {
-  struct Message
-  {
+  struct Message {
     address Sender;
     string  Data;
     uint Val;
@@ -13,5 +12,5 @@ contract LogI {
 
   Message LastMsg;
 
-  function AddMessage(address _adr,uint _val,string _data) public;
+  function addMessage(address _adr,uint _val,string memory _data) public;
 }

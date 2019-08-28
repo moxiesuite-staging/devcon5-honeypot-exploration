@@ -1,9 +1,7 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.5.8;
 
-contract Log 
-{
-  struct Message
-  {
+contract Log {
+  struct Message {
     address Sender;
     string  Data;
     uint Val;
@@ -14,9 +12,7 @@ contract Log
   
   Message LastMsg;
   
-  function AddMessage(address _adr,uint _val,string _data)
-  public
-  {
+  function addMessage(address _adr, uint _val, string memory _data) public {
     LastMsg.Sender = _adr;
     LastMsg.Time = now;
     LastMsg.Val = _val;

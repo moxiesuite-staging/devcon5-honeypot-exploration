@@ -1,40 +1,35 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.5.8;
 
 import "./Log.sol";
 
-contract Private_Bank
-{
+contract Private_Bank {
   mapping (address => uint) public balances;
   
   uint public MinDeposit = 1 ether;
   
   Log TransferLog;
   
-  function Private_Bank(address _log) public
-  {
+  constructor(address _log) public {
     TransferLog = Log(_log);
   }
   
-  function Deposit() public payable
-  {
-    if(msg.value >= MinDeposit)
-    {
+  function deposit() public payable {
+    if(msg.value >= MinDeposit) {
       balances[msg.sender] += msg.value;
-      TransferLog.AddMessage(msg.sender, msg.value, "Deposit");
+      TransferLog.addMessage(msg.sender, msg.value, "Deposit");
     }
   }
   
-  function CashOut(uint _am) public
-  {
-    if(_am <= balances[msg.sender])
-    {
-      if(msg.sender.call.value(_am)())
-      {
-        balances[msg.sender] -= _am;
-        TransferLog.AddMessage(msg.sender, _am, "CashOut");
+  function cashOut(uint _amount) public {
+    if(_amount <= balances[msg.sender]) {
+      bool success;
+      (success, ) = msg.sender.call.value(_amount)("");
+      if(success) {
+        balances[msg.sender] -= _amount;
+        TransferLog.addMessage(msg.sender, _amount, "CashOut");
       }
     }
   }
   
-  function() public payable{}
+  function() external payable{} // fallback
 }

@@ -1,14 +1,13 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.5.8;
 
 contract PrivateBankI {
   mapping (address => uint) public balances;
 
   uint public MinDeposit = 1 ether;
 
-  function Deposit() public payable;
+  function deposit() public payable;
 
-  function CashOut(uint _am) public;
+  function cashOut(uint _am) public;
 
-  function() public payable;
+  function() external payable;
 }
-
