@@ -1,5 +1,6 @@
 pragma solidity ^0.5.8;
 
+// Log Interface
 contract LogI {
   struct Message {
     address Sender;

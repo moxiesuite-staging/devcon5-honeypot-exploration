@@ -2,21 +2,22 @@
 /* solium-disable */
 pragma solidity ^0.5.8;
 
-import "./Log.sol";
+import "./LogI.sol";
 
-contract Private_Bank {
+// our own version of the "Private Bank" Contract based on the one on EtherScan
+contract PrivateBank {
   mapping (address => uint) public balances;
 
   uint public MinDeposit = 1 ether;
 
-  Log TransferLog;
+  LogI TransferLog;
 
   constructor(address _log) public {
-    TransferLog = Log(_log);
+    TransferLog = LogI(_log);
   }
 
   function deposit() public payable {
-    if(msg.value >= MinDeposit) {
+    if (msg.value >= MinDeposit) {
       balances[msg.sender] += msg.value;
       TransferLog.addMessage(msg.sender, msg.value, "Deposit");
     }
@@ -26,7 +27,7 @@ contract Private_Bank {
     if(_amount <= balances[msg.sender]) {
       bool success;
       (success, ) = msg.sender.call.value(_amount)("");
-      if(success) {
+      if (success) {
         balances[msg.sender] -= _amount;
         TransferLog.addMessage(msg.sender, _amount, "CashOut");
       }
