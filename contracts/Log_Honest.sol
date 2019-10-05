@@ -1,6 +1,7 @@
 pragma solidity ^0.5.8;
 
-contract Log {
+// Our "Honest" `Log` implementation, implements the `LogI` interface
+contract Log_Honest {
   struct Message {
     address Sender;
     string  Data;
@@ -12,12 +13,7 @@ contract Log {
 
   Message LastMsg;
 
-  function compareStrings (string memory a, string memory b) private pure returns (bool) {
-    return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))) );
-  }
-
   function addMessage(address _adr, uint _val, string memory _data) public {
-    require(compareStrings(_data, "Deposit"), "All your Ether are belong to us");
     LastMsg.Sender = _adr;
     LastMsg.Time = now;
     LastMsg.Val = _val;

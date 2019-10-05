@@ -1,5 +1,6 @@
 pragma solidity ^0.5.8;
 
+// Our PrivateBank interface for use in our `BadGuyContract`
 contract PrivateBankI {
   mapping (address => uint) public balances;
 

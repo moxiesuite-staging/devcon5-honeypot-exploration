@@ -1,14 +1,15 @@
-var Log = artifacts.require('./Log.sol')
-var Private_Bank = artifacts.require('./Private_Bank.sol')
+const Log_Honest = artifacts.require("./Log_Honest.sol");
+const PrivateBank = artifacts.require("./PrivateBank.sol");
 
 module.exports = async function(deployer) {
+  // Only deploy the PrivateBenk on our local testnet
   return deployer.then(async () => {
     if (/(local)/.test(deployer.network)) {
-      await deployer.deploy(Log)
-      let logContract = await Log.deployed();
+      await deployer.deploy(Log_Honest);
+      const logContract = await Log_Honest.deployed();
 
-      await deployer.deploy(Private_Bank, logContract.address)
-      let bankContract = await Private_Bank.deployed()
+      await deployer.deploy(PrivateBank, logContract.address)
+      const bankContract = await PrivateBank.deployed()
     }
   })
 }
