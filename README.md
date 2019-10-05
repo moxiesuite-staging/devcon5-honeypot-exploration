@@ -16,7 +16,7 @@ There are two ways the contracts can be run: `local`, and `forked`.
 
 ### Local
 
-When running in `local` mode, we deploy **both** the target to exploit and the exploit contract to our local blockchain created by Ganache. For the target to exploit, we use the contract code _as displayed_ on [etherscan.io](https://etherscan.io/address/0x95d34980095380851902ccd9a1fb4c813c2cb639#code).
+When running in `local` mode, we deploy **both** the target to exploit and the exploit contract to our local blockchain created by Ganache. For the target to exploit, we use the contract code _as displayed_ on [etherscan.io](https://etherscan.io/address/0x95d34980095380851902ccd9a1fb4c813c2cb639#code) (note: we have updated our version of the contract to use a newer Solidity version).
 
 ### Forked
 
